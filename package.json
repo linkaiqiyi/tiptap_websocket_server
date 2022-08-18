@@ -1,0 +1,25 @@
+{
+  "name": "tiptap_server",
+  "version": "1.0.0",
+  "description": "tiptap websocket 端，用来连接多端协同",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "resolutions": {
+    "prosemirror-state": "^1.2.3",
+    "prosemirror-view": "^1.9.10",
+    "prosemirror-model": "^1.15.0",
+    "y-protocols": "^1.0.1"
+  },
+  "dependencies": {
+    "@hocuspocus/extension-logger": "1.0.0-alpha.78",
+    "@hocuspocus/extension-webhook": "1.0.0-alpha.68",
+    "@hocuspocus/server": "1.0.0-alpha.104",
+    "@hocuspocus/transformer": "1.0.0-alpha.23",
+    "@tiptap/starter-kit": "^2.0.0-beta.191"
+  }
+}
