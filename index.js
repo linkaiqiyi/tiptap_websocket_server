@@ -8,16 +8,27 @@ const server = Server.configure({
   port: 4444,
   extensions: [
     new Webhook({
-      url: "http://10.2.129.78:3000/save-data",
+      url: "http://10.2.129.119:3000/save-data",
       transformer,
+      debounce: 0,
       events: [
         Events["onChange"],
-        // Events["onConnect"],
-        Events["onCreate"],
-        // Events["onDisconnect"],
+        Events["onConnect"],
+        // Events["onCreate"],
+        Events["onDisconnect"],
       ],
     }),
-    new Logger(),
+    new Logger({
+      onLoadDocument: true,
+      onChange: false,
+      onStoreDocument: false,
+      onConnect: false,
+      onDisconnect: false,
+      onUpgrade: false,
+      onRequest: false,
+      onDestroy: false,
+      onConfigure: false,
+    }),
   ],
   async onAuthenticate(data) {
     const { token, requestParameters } = data;
