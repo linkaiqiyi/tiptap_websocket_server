@@ -14,7 +14,7 @@ const server = Server.configure({
       events: [
         Events["onChange"],
         Events["onConnect"],
-        // Events["onCreate"],
+        Events["onCreate"],
         Events["onDisconnect"],
       ],
     }),
