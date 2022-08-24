@@ -8,7 +8,7 @@ const server = Server.configure({
   port: 4444,
   extensions: [
     new Webhook({
-      url: "http://10.2.129.119:3000/save-data",
+      url: "http://127.0.0.1:3000/save-data",
       transformer,
       debounce: 0,
       events: [
