@@ -10,11 +10,11 @@ const server = Server.configure({
     new Webhook({
       url: "http://127.0.0.1:3000/save-data",
       transformer,
-      debounce: 5000,
+      // debounce: 5000,
       events: [
         Events["onChange"],
         Events["onConnect"],
-        Events["onCreate"],
+        // Events["onCreate"],
         Events["onDisconnect"],
       ],
     }),
