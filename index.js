@@ -10,7 +10,7 @@ const server = Server.configure({
     new Webhook({
       url: "http://127.0.0.1:3000/save-data",
       transformer,
-      debounce: 0,
+      debounce: 5000,
       events: [
         Events["onChange"],
         Events["onConnect"],
@@ -35,7 +35,6 @@ const server = Server.configure({
     const name = requestParameters.get("name");
     const password = requestParameters.get("password");
     const room = requestParameters.get("room");
-    console.log(name, password, room);
     if (token !== "super-secret-token") {
       throw new Error("Not authorized!");
     }
@@ -44,6 +43,8 @@ const server = Server.configure({
       user: {
         id: 1234,
         name: name,
+        password,
+        room,
       },
     };
   },
