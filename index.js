@@ -5,12 +5,15 @@ const { Database } = require("./extensions/extension-database/index.js");
 const transformer = require("./transformer.js");
 const { MongoClient } = require("mongodb");
 const { mergeUpdates } = require("yjs");
+const dbconfig = require('./dbconfig.json')
 
-const uri = "mongodb://root:lin52025@localhost:51000/";
+const uri = `mongodb://${dbconfig.username ? (dbconfig.username + ':' + dbconfig.password + '@') : ''}${dbconfig.host ?? 'localhost'}:${dbconfig.port ?? 27017}/`;
+
+console.log(uri);
 
 const client = new MongoClient(uri);
 
-const DATABASE = process.env.DATABASE || "hocus";
+const DATABASE = dbconfig.db || 'hocus';
 var db;
 const initConnection = async () => {
   try {
@@ -29,32 +32,6 @@ const initConnection = async () => {
 const server = Server.configure({
   port: 4444,
   extensions: [
-    // new Webhook({
-    //   url: "http://127.0.0.1:3000/save-data",
-    //   transformer,
-    //   // debounce: 5000,
-    //   events: [
-    //     Events["onChange"],
-    //     Events["onConnect"],
-    //     // Events["onCreate"],
-    //     Events["onDisconnect"],
-    //   ],
-    // }),
-    // new Redis({
-    //   port: 6379,
-    //   host: "127.0.0.1",
-    //   options: {
-    //     db: 1,
-    //   },
-    // }),
-    // new Database({
-    //   fetch(data) {
-    //     console.log('121212', data);
-    //   },
-    //   store(data) {
-    //     console.log('34343434', data);
-    //   }
-    // }),
     new Database({
       transformer,
       fetch: async ({ documentName }) => {
