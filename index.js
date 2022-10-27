@@ -6,10 +6,9 @@ const transformer = require("./transformer.js");
 const { MongoClient } = require("mongodb");
 const { mergeUpdates } = require("yjs");
 const dbconfig = require('./dbconfig.json')
+const { Redis } = require('@hocuspocus/extension-redis')
 
 const uri = `mongodb://${dbconfig.username ? (dbconfig.username + ':' + dbconfig.password + '@') : ''}${dbconfig.host ?? 'localhost'}:${dbconfig.port ?? 27017}/`;
-
-console.log(uri);
 
 const client = new MongoClient(uri);
 
@@ -32,6 +31,7 @@ const initConnection = async () => {
 const server = Server.configure({
   port: 4444,
   extensions: [
+    new Redis(),
     new Database({
       transformer,
       fetch: async ({ documentName }) => {
