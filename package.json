@@ -10,14 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hocuspocus/extension-logger": "1.0.0-alpha.78",
-    "@hocuspocus/extension-webhook": "1.0.0-alpha.68",
-    "@hocuspocus/extension-redis": "1.0.0-alpha.69",
     "@hocuspocus/extension-database": "1.0.0-alpha.20",
-    "@tiptap/extension-collaboration": "2.0.0-beta.199",
-    "mongodb": "4.10.0",
+    "@hocuspocus/extension-logger": "1.0.0-alpha.78",
+    "@hocuspocus/extension-redis": "1.0.0-alpha.69",
+    "@hocuspocus/extension-webhook": "1.0.0-alpha.68",
     "@hocuspocus/server": "1.0.yar0-alpha.104",
     "@hocuspocus/transformer": "1.0.0-alpha.23",
-    "@tiptap/starter-kit": "2.0.0-beta.191"
+    "@tiptap/extension-collaboration": "2.0.0-beta.199",
+    "@tiptap/starter-kit": "2.0.0-beta.191",
+    "mongodb": "4.0.0"
   }
 }

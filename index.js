@@ -5,14 +5,25 @@ const { Database } = require("./extensions/extension-database/index.js");
 const transformer = require("./transformer.js");
 const { MongoClient } = require("mongodb");
 const { mergeUpdates } = require("yjs");
-const dbconfig = require('./dbconfig.json')
-const { Redis } = require('@hocuspocus/extension-redis')
+const dbconfig = require("./dbconfig.json");
+const { Redis } = require("@hocuspocus/extension-redis");
 
-const uri = `mongodb://${dbconfig.username ? (dbconfig.username + ':' + dbconfig.password + '@') : ''}${dbconfig.host ?? 'localhost'}:${dbconfig.port ?? 27017}/`;
+const uri =
+  dbconfig.mongodbUri ??
+  `mongodb://${
+    dbconfig.mongodbConfigure.username
+      ? dbconfig.mongodbConfigure.username +
+        ":" +
+        dbconfig.mongodbConfigure.password +
+        "@"
+      : ""
+  }${dbconfig.mongodbConfigure.host ?? "localhost"}:${
+    dbconfig.mongodbConfigure.port ?? 27017
+  }/`;
 
 const client = new MongoClient(uri);
 
-const DATABASE = dbconfig.db || 'hocus';
+const DATABASE = dbconfig.mongodbConfigure.db || "hocus";
 var db;
 const initConnection = async () => {
   try {
@@ -29,9 +40,9 @@ const initConnection = async () => {
 };
 
 const server = Server.configure({
-  port: 4444,
+  port: 4445,
   extensions: [
-    new Redis(),
+    new Redis(dbconfig.redisConfigure),
     new Database({
       transformer,
       fetch: async ({ documentName }) => {
